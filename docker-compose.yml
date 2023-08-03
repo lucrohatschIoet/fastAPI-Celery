@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  # api:
+  #   build: .
+  #   container_name: api
+  #   restart: always
+  #   ports:
+  #     - 5000:5000
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - celery
+    
+  redis:
+    image: redis:7.0.4-bullseye
+    container_name: redis
+    restart: always
+    command: >
+          --requirepass 123456
+    ports: 
+      - 6377:6379
+    volumes:
+      - ./data:/data
+    # networks:
+    #   - celery
+
+  # worker:
+  #   build: worker/.
+  #   container_name: worker
+  #   restart: always
+  #   depends_on:
+  #     - redis
+  #   networks:
+  #     - celery
+
+# networks:
+#   celery:
+#     driver: bridge
